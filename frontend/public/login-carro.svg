@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="grao" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.07 0"/>
+    </filter>
+    <filter id="sombra" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <linearGradient id="vidro" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b3445"/>
+      <stop offset="1" stop-color="#151a24"/>
+    </linearGradient>
+    <linearGradient id="lataria" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#dfe3ea"/>
+      <stop offset="0.18" stop-color="#ffffff"/>
+      <stop offset="0.82" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#d6dbe3"/>
+    </linearGradient>
+    <linearGradient id="teto" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e9ecf1"/>
+      <stop offset="0.5" stop-color="#f8f9fb"/>
+      <stop offset="1" stop-color="#e2e6ec"/>
+    </linearGradient>
+  </defs>
+
+  <!-- asfalto -->
+  <rect width="900" height="1200" fill="#1a1d24"/>
+  <rect width="900" height="1200" filter="url(#grao)"/>
+
+  <!-- faixas -->
+  <g fill="#e9ebef" opacity="0.9">
+    <rect x="96" y="0" width="10" height="1200"/>
+    <rect x="186" y="-40" width="10" height="150"/>
+    <rect x="186" y="230" width="10" height="150"/>
+    <rect x="186" y="500" width="10" height="150"/>
+    <rect x="186" y="770" width="10" height="150"/>
+    <rect x="186" y="1040" width="10" height="150"/>
+    <rect x="808" y="60" width="10" height="150"/>
+    <rect x="808" y="330" width="10" height="150"/>
+    <rect x="808" y="600" width="10" height="150"/>
+    <rect x="808" y="870" width="10" height="150"/>
+    <rect x="808" y="1140" width="10" height="150"/>
+  </g>
+
+  <!-- carro (vista de cima, frente para cima) -->
+  <g transform="translate(610 610) rotate(-8) scale(1.62)">
+    <ellipse cx="14" cy="18" rx="160" ry="330" fill="#000" opacity="0.55" filter="url(#sombra)"/>
+
+    <!-- rodas aparecendo -->
+    <g fill="#0d0f13">
+      <rect x="-150" y="-215" width="22" height="88" rx="9"/>
+      <rect x="128" y="-215" width="22" height="88" rx="9"/>
+      <rect x="-152" y="130" width="22" height="92" rx="9"/>
+      <rect x="130" y="130" width="22" height="92" rx="9"/>
+    </g>
+
+    <!-- carroceria -->
+    <path d="M-112 -268 C-112 -300 -70 -312 0 -312 C70 -312 112 -300 112 -268
+             C128 -238 140 -190 141 -130 L143 168 C143 240 132 288 0 296
+             C-132 288 -143 240 -143 168 L-141 -130 C-140 -190 -128 -238 -112 -268 Z"
+          fill="url(#lataria)"/>
+
+    <!-- vincos do capô -->
+    <path d="M-62 -292 C-70 -230 -76 -175 -82 -128 M62 -292 C70 -230 76 -175 82 -128"
+          stroke="#c9cfd8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- faróis -->
+    <path d="M-100 -276 C-92 -292 -64 -298 -40 -299 L-44 -290 C-66 -288 -88 -282 -100 -270 Z" fill="#b9c2cf"/>
+    <path d="M100 -276 C92 -292 64 -298 40 -299 L44 -290 C66 -288 88 -282 100 -270 Z" fill="#b9c2cf"/>
+
+    <!-- retrovisores -->
+    <path d="M-140 -92 L-170 -84 C-176 -82 -176 -70 -170 -68 L-140 -66 Z" fill="#e3e7ed"/>
+    <path d="M140 -92 L170 -84 C176 -82 176 -70 170 -68 L140 -66 Z" fill="#e3e7ed"/>
+
+    <!-- para-brisa -->
+    <path d="M-112 -110 C-80 -132 80 -132 112 -110 L104 -28 C70 -38 -70 -38 -104 -28 Z" fill="url(#vidro)"/>
+    <!-- janelas laterais -->
+    <path d="M-120 -90 L-112 -18 L-114 120 L-124 150 L-128 -60 Z" fill="#1f2531"/>
+    <path d="M120 -90 L112 -18 L114 120 L124 150 L128 -60 Z" fill="#1f2531"/>
+    <!-- teto -->
+    <rect x="-104" y="-30" width="208" height="168" rx="22" fill="url(#teto)"/>
+    <!-- vidro traseiro -->
+    <path d="M-104 140 C-70 132 70 132 104 140 L94 196 C60 206 -60 206 -94 196 Z" fill="url(#vidro)"/>
+
+    <!-- tampa traseira e lanternas -->
+    <path d="M-80 252 C-40 262 40 262 80 252" stroke="#c9cfd8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M-132 256 C-118 278 -96 288 -70 292 L-70 284 C-94 280 -114 270 -126 252 Z" fill="#7a2a2f"/>
+    <path d="M132 256 C118 278 96 288 70 292 L70 284 C94 280 114 270 126 252 Z" fill="#7a2a2f"/>
+  </g>
+</svg>
