@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Paleta monocromática a partir da cor da logo (#112040) */
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #112040;
+  --color-primary-600: #0a152c;
+  --color-primary-50: #f3f4f7;
+  --color-navy: #112040;
+  --color-navy-2: #1a2b4f;
+  --color-navy-3: #24365c;
+  --color-side: #a3acbf;
+  --color-page: #ffffff;
+  --color-stage: #f5f6f8;
+  --color-stage-2: #eceef2;
+  --color-line: #e4e6eb;
+  --color-ink: #112040;
+  --color-muted: #6b7385;
+  --color-ok: #2f6b4f;
+  --color-ok-bg: #f3f4f7;
+  --color-warn: #8a5a12;
+  --color-warn-bg: #f3f4f7;
+  --color-bad: #a23b3b;
+  --color-bad-bg: #f3f4f7;
+  --color-info-bg: #f3f4f7;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
