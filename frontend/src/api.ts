@@ -49,6 +49,7 @@ export interface Automovel {
   diaria: number;
   proprietario: Agente;
   temFoto: boolean;
+  fotoUrl: string | null;
   situacao: "DISPONIVEL" | "RESERVADO" | "ALUGADO";
 }
 
@@ -203,9 +204,6 @@ const PUT = (corpo: unknown): RequestInit => ({
   body: json(corpo),
 });
 
-/** Muda quando uma foto é enviada, para o navegador não mostrar a imagem antiga do cache. */
-let versaoFoto = Date.now();
-
 export const api = {
   login: (login: string, senha: string) =>
     req<Usuario>("/auth/login", POST({ login, senha })),
@@ -254,15 +252,13 @@ export const api = {
     req<Automovel>(`/automoveis/${id}?agenteId=${agenteId}`, PUT(dados)),
   excluirAutomovel: (id: number, agenteId: number) =>
     req<void>(`/automoveis/${id}?agenteId=${agenteId}`, { method: "DELETE" }),
-  enviarFoto: async (id: number, agenteId: number, arquivo: File) => {
+  enviarFoto: (id: number, agenteId: number, arquivo: File) => {
     const form = new FormData();
     form.append("foto", arquivo);
-    const r = await req<Automovel>(
-      `/automoveis/${id}/foto?agenteId=${agenteId}`,
-      { method: "PUT", body: form },
-    );
-    versaoFoto = Date.now();
-    return r;
+    return req<Automovel>(`/automoveis/${id}/foto?agenteId=${agenteId}`, {
+      method: "PUT",
+      body: form,
+    });
   },
   removerFoto: (id: number, agenteId: number) =>
     req<Automovel>(`/automoveis/${id}/foto?agenteId=${agenteId}`, {
@@ -319,8 +315,9 @@ export const api = {
     ),
 };
 
-export const fotoUrl = (carro: Pick<Automovel, "id">) =>
-  `${API_URL}/automoveis/${carro.id}/foto?v=${versaoFoto}`;
+/** Link da foto no Cloudinary (cada envio gera um link novo, então o cache nunca mostra a foto antiga). */
+export const fotoUrl = (carro: Pick<Automovel, "fotoUrl">) =>
+  carro.fotoUrl ?? "";
 
 // ---------- regras de exibição ----------
 /** Bancos sempre aparecem com o código bancário (COMPE/BACEN). */

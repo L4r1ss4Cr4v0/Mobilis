@@ -1,6 +1,5 @@
 package br.pucminas.mobilis.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,17 +36,14 @@ public class Automovel {
     @ManyToOne
     private Agente proprietario;
 
-    @JsonIgnore
-    @Column(length = 6_000_000)
-    private byte[] foto;
-
-    @JsonIgnore
-    private String fotoTipo;
+    /** Link da foto no Cloudinary (a imagem não fica mais no banco). */
+    @Column(length = 500)
+    private String fotoUrl;
 
     @Transient
     private String situacao = "DISPONIVEL";
 
-    public boolean isTemFoto() { return foto != null; }
+    public boolean isTemFoto() { return fotoUrl != null; }
 
     public Long getId() { return id; }
     public String getMatricula() { return matricula; }
@@ -66,10 +62,8 @@ public class Automovel {
     public void setDiaria(BigDecimal diaria) { this.diaria = diaria; }
     public Agente getProprietario() { return proprietario; }
     public void setProprietario(Agente proprietario) { this.proprietario = proprietario; }
-    public byte[] getFoto() { return foto; }
-    public void setFoto(byte[] foto) { this.foto = foto; }
-    public String getFotoTipo() { return fotoTipo; }
-    public void setFotoTipo(String fotoTipo) { this.fotoTipo = fotoTipo; }
+    public String getFotoUrl() { return fotoUrl; }
+    public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
     public String getSituacao() { return situacao; }
     public void setSituacao(String situacao) { this.situacao = situacao; }
 }

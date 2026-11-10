@@ -24,7 +24,7 @@ O <b>Mobilis</b> é o protótipo desenvolvido no <b>Laboratório 02 (Sistema de 
 [![GitHub repo size](https://img.shields.io/github/repo-size/L4r1ss4Cr4v0/Mobilis?color=112040)](https://github.com/L4r1ss4Cr4v0/Mobilis)
 [![Licença](https://img.shields.io/badge/Licença-MIT-112040)](#-licença)
 
-![React](https://img.shields.io/badge/React-19.1-112040?style=for-the-badge&logo=react&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-6.3-112040?style=for-the-badge&logo=vite&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-112040?style=for-the-badge&logo=typescript&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1-112040?style=for-the-badge&logo=tailwindcss&logoColor=white) ![Java](https://img.shields.io/badge/Java-25-112040?style=for-the-badge&logo=openjdk&logoColor=white) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.0.0-112040?style=for-the-badge&logo=springboot&logoColor=white) ![Maven](https://img.shields.io/badge/Maven-3.9-112040?style=for-the-badge&logo=apachemaven&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-112040?style=for-the-badge&logo=supabase&logoColor=white) ![GitHub language count](https://img.shields.io/github/languages/count/L4r1ss4Cr4v0/Mobilis?style=for-the-badge&color=112040&logo=github) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/L4r1ss4Cr4v0/Mobilis?style=for-the-badge&color=112040&logo=git)
+![React](https://img.shields.io/badge/React-19.1-112040?style=for-the-badge&logo=react&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-6.3-112040?style=for-the-badge&logo=vite&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-112040?style=for-the-badge&logo=typescript&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1-112040?style=for-the-badge&logo=tailwindcss&logoColor=white) ![Java](https://img.shields.io/badge/Java-25-112040?style=for-the-badge&logo=openjdk&logoColor=white) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.0.0-112040?style=for-the-badge&logo=springboot&logoColor=white) ![Maven](https://img.shields.io/badge/Maven-3.9-112040?style=for-the-badge&logo=apachemaven&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-112040?style=for-the-badge&logo=supabase&logoColor=white) ![Cloudinary](https://img.shields.io/badge/Cloudinary-imagens-112040?style=for-the-badge&logo=cloudinary&logoColor=white) ![GitHub language count](https://img.shields.io/github/languages/count/L4r1ss4Cr4v0/Mobilis?style=for-the-badge&color=112040&logo=github) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/L4r1ss4Cr4v0/Mobilis?style=for-the-badge&color=112040&logo=git)
 
 ---
 
@@ -127,6 +127,7 @@ O <b>Mobilis</b> é o protótipo desenvolvido no <b>Laboratório 02 (Sistema de 
 ### ⚙️ Infraestrutura
 
 - **Cloud:** Supabase (banco PostgreSQL gerenciado, conexão pelo _Session pooler_)
+- **Imagens:** Cloudinary (fotos dos automóveis; o banco guarda só o link)
 
 ---
 
@@ -167,7 +168,7 @@ Todos os diagramas estão no [board do Miro](https://miro.com/app/board/uXjVES6Z
 | RF03 Introduzir, modificar, consultar e cancelar pedidos                          | `PedidoController`, telas Novo pedido e Meus pedidos                                                     |
 | RF04 Identificação dos agentes e código bancário                                  | `AgenteService`; bancos sempre exibidos com o código                                                     |
 | RF05 Cadastro de automóveis só por agentes                                        | `AutomovelService` (o agente vira proprietário)                                                          |
-| RF06 No máximo 1 imagem por veículo                                               | `PUT /api/automoveis/{id}/foto` substitui a foto                                                         |
+| RF06 No máximo 1 imagem por veículo                                               | `PUT /api/automoveis/{id}/foto` envia a foto ao Cloudinary e substitui a anterior                        |
 | RF07 Agente só vê os clientes vinculados a ele                                    | vínculo criado pelo pedido ou pelo cadastro feito pelo agente                                            |
 | RF08 Análise financeira com parecer positivo ou negativo                          | `POST /api/pedidos/{id}/parecer`; o agente também modifica o pedido em análise                           |
 | RF09 Contrato a partir de template com preenchimento automático e titularidade    | `ContratoService` (modelo, prévia e emissão) e editor de contrato; quem redige é o proprietário do carro |
@@ -204,6 +205,7 @@ O `application.properties` lê o arquivo `backend/.env` automaticamente (`spring
 | `SUPABASE_DB_PASSWORD` | Senha do banco.                                        | `sua-senha-do-banco`                                                                  |
 | `PORT`                 | Porta da API (opcional).                               | `8080`                                                                                |
 | `APP_SEED`             | Popula o banco vazio com dados de exemplo (opcional).  | `true`                                                                                |
+| `CLOUDINARY_URL`       | Credenciais do Cloudinary para guardar as fotos dos automóveis (painel do Cloudinary > Dashboard > _API environment variable_). | `cloudinary://API_KEY:API_SECRET@CLOUD_NAME` |
 
 #### 2 Front-end (React, Vite)
 

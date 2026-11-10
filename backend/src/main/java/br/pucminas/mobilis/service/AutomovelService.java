@@ -23,10 +23,12 @@ public class AutomovelService {
 
     private final EntityManager em;
     private final AgenteService agenteService;
+    private final ImagemService imagens;
 
-    public AutomovelService(EntityManager em, AgenteService agenteService) {
+    public AutomovelService(EntityManager em, AgenteService agenteService, ImagemService imagens) {
         this.em = em;
         this.agenteService = agenteService;
+        this.imagens = imagens;
     }
 
     public List<Automovel> listar(Long agenteId, LocalDate inicio, LocalDate fim) {
@@ -86,6 +88,7 @@ public class AutomovelService {
         Long pedidos = em.createQuery("select count(p) from Pedido p where p.automovel = :a", Long.class)
                 .setParameter("a", a).getSingleResult();
         if (pedidos > 0) throw erro("Este automóvel já tem pedidos e não pode ser excluído.");
+        if (a.getFotoUrl() != null) imagens.remover(a.getId());
         em.remove(a);
     }
 
@@ -98,19 +101,18 @@ public class AutomovelService {
         String tipo = arq.getContentType();
         if (tipo == null || !tipo.startsWith("image/")) throw erro("Envie apenas imagens (JPG, PNG ou WEBP).");
         try {
-            a.setFoto(arq.getBytes());
+            a.setFotoUrl(imagens.enviar(a.getId(), arq.getBytes(), tipo));
         } catch (IOException e) {
             throw erro("Não foi possível ler a imagem enviada.");
         }
-        a.setFotoTipo(tipo);
         return a;
     }
 
     @Transactional
     public Automovel removerFoto(Long id, Long agenteId) {
         Automovel a = doAgente(id, agenteId);
-        a.setFoto(null);
-        a.setFotoTipo(null);
+        if (a.getFotoUrl() != null) imagens.remover(a.getId());
+        a.setFotoUrl(null);
         return a;
     }
 

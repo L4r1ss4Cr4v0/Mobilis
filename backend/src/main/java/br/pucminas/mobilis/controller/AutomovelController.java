@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -68,10 +69,11 @@ public class AutomovelController {
     }
 
     @GetMapping("/{id}/foto")
-    public ResponseEntity<byte[]> foto(@PathVariable Long id) {
+    public ResponseEntity<Void> foto(@PathVariable Long id) {
+        // a foto fica no Cloudinary: a rota antiga só redireciona para o link
         Automovel a = service.buscar(id);
-        if (a.getFoto() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok().contentType(MediaType.parseMediaType(a.getFotoTipo())).body(a.getFoto());
+        if (a.getFotoUrl() == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(a.getFotoUrl())).build();
     }
 
     @DeleteMapping("/{id}/foto")
