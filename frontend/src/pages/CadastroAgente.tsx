@@ -162,7 +162,7 @@ export function CadastroAgente() {
         </Button>
         <div className="mt-6 text-sm text-muted">
           Já tem conta?{" "}
-          <Link to="/" className="text-ink underline underline-offset-4">
+          <Link to="/login" className="text-ink underline underline-offset-4">
             Entrar
           </Link>
         </div>

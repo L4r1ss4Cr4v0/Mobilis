@@ -15,10 +15,13 @@ export function AuthLayout({
 }) {
   return (
     <div className="grid min-h-screen lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)]">
-      <section className="flex min-h-screen flex-col px-8 py-10 sm:px-14 xl:px-20">
-        <Logo altura={20} />
+      <section className="flex min-h-screen flex-col px-8 py-10 sm:px-14 xl:px-20 items-center">
+        <Logo altura={20} className="self-start" />
 
-        <div className="my-auto w-full py-14" style={{ maxWidth: largura }}>
+        <div
+          className="my-auto w-full py-14 items-center"
+          style={{ maxWidth: largura }}
+        >
           <h1 className="text-[44px] leading-[1.05] font-normal tracking-tight">
             {titulo}
           </h1>

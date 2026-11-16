@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
+import { Landing } from "./pages/Landing";
 import { Login } from "./pages/Login";
 import { Cadastro } from "./pages/Cadastro";
 import { CadastroAgente } from "./pages/CadastroAgente";
@@ -18,7 +19,8 @@ import { PerfilAgente } from "./pages/agente/PerfilAgente";
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/cadastro" element={<Cadastro />} />
       <Route path="/cadastro/agente" element={<CadastroAgente />} />
 

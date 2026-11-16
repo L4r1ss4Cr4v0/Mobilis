@@ -6,12 +6,20 @@ import { ehAgente, sair, usuarioLogado, type Agente } from "../api";
 export function Logo({
   branca = false,
   altura = 18,
+  to = "/",
+  className = "",
 }: {
   branca?: boolean;
   altura?: number;
+  to?: string;
+  className?: string;
 }) {
   return (
-    <Link to="/" className="inline-block shrink-0" aria-label="Mobilis">
+    <Link
+      to={to}
+      className={"inline-block shrink-0 " + className}
+      aria-label="Mobilis"
+    >
       <img
         src={branca ? "/logo-mobilis-branca.png" : "/logo-mobilis.png"}
         alt="Mobilis"
@@ -46,7 +54,7 @@ export function Layout({
 }) {
   const navigate = useNavigate();
   const usuario = usuarioLogado();
-  if (!usuario) return <Navigate to="/" replace />;
+  if (!usuario) return <Navigate to="/login" replace />;
   if (ehAgente(usuario) !== (area === "agente"))
     return (
       <Navigate
@@ -67,7 +75,9 @@ export function Layout({
     <div className="min-h-screen">
       <header className="sticky top-0 z-40 border-b border-line bg-white">
         <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-10 px-8">
-          <Logo />
+          <Logo
+            to={area === "agente" ? "/agente/pedidos" : "/cliente/novo-pedido"}
+          />
           <nav className="flex h-full items-stretch gap-7" aria-label="Menu">
             {MENU[area].map(([to, rotulo]) => (
               <NavLink
@@ -96,7 +106,7 @@ export function Layout({
               className="text-muted transition hover:text-ink px-5 py-2 border border-1 border-gray-300 hover:border-ink rounded-b-sm"
               onClick={() => {
                 sair();
-                navigate("/", { replace: true });
+                navigate("/login", { replace: true });
               }}
             >
               Sair

@@ -42,3 +42,194 @@
     color: inherit;
   }
 }
+
+/* ---------- página inicial (Landing) ---------- */
+html:has(.lp) {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+@layer components {
+  .lp :focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px;
+  }
+  .lp-pular {
+    position: fixed;
+    z-index: 100;
+    left: 16px;
+    top: 12px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    background: #ffffff;
+    color: var(--color-navy);
+    font-weight: 600;
+    transform: translateY(-200%);
+    transition: transform 0.2s;
+  }
+  .lp-pular:focus {
+    transform: none;
+  }
+
+  /* faixa de busca do topo */
+  .lp-campo {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+    padding: 14px 20px;
+    border-right: 1px solid rgb(255 255 255 / 0.14);
+    background: rgb(17 32 64 / 0.72);
+    backdrop-filter: blur(8px);
+  }
+  .lp-campo label,
+  .lp-campo > span {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .lp-campo select,
+  .lp-campo input,
+  .lp-campo output {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    padding: 2px 0;
+    background: transparent;
+    color: rgb(255 255 255 / 0.85);
+    font-size: 15px;
+  }
+  .lp-campo input {
+    color-scheme: dark;
+  }
+  .lp-campo select option {
+    color: #111111;
+  }
+
+  /* filtros da vitrine */
+  .lp-filtro {
+    min-width: 0;
+    padding: 4px 20px;
+    border-right: 1px solid var(--color-line);
+  }
+  .lp-filtro label {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .lp-filtro select,
+  .lp-filtro input {
+    width: 100%;
+    min-height: 32px;
+    border: 0;
+    padding: 4px 0;
+    background: transparent;
+    color: var(--color-muted);
+    font-size: 15px;
+  }
+  @media (max-width: 980px) {
+    .lp-filtro {
+      border-right: 0;
+      padding-inline: 10px;
+    }
+  }
+
+  .lp-duvida summary::-webkit-details-marker {
+    display: none;
+  }
+  .lp-duvida summary::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    flex: none;
+    border-right: 2px solid var(--color-ink);
+    border-bottom: 2px solid var(--color-ink);
+    transform: rotate(45deg) translateY(-3px);
+    transition: transform 0.3s;
+  }
+  .lp-duvida[open] summary::after {
+    transform: rotate(-135deg) translateY(-3px);
+  }
+
+  /* animações */
+  .lp-tracejado {
+    background: linear-gradient(90deg, var(--color-muted) 50%, transparent 0) 0 0 / 12px 2px repeat-x;
+    animation: lp-tracejado 1.2s linear infinite;
+  }
+  .lp-sobe {
+    animation: lp-sobe 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .lp-a1 {
+    animation-delay: 0.12s;
+  }
+  .lp-a2 {
+    animation-delay: 0.24s;
+  }
+  .lp-a3 {
+    animation-delay: 0.4s;
+  }
+  .lp-dirige {
+    animation: lp-dirige 16s linear infinite;
+  }
+  .lp-d2 {
+    animation-duration: 22s;
+    animation-delay: -9s;
+  }
+  .lp-d3 {
+    animation-duration: 19s;
+    animation-delay: -4s;
+  }
+  .lp-d4 {
+    animation-duration: 26s;
+    animation-delay: -17s;
+  }
+  .lp-reveal {
+    transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .lp-reveal.lp-pre {
+    transform: translateY(28px);
+  }
+  .lp-parado {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .group:hover .lp-parado {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes lp-sobe {
+  from {
+    opacity: 0.01;
+    transform: translateY(26px);
+  }
+}
+@keyframes lp-dirige {
+  from {
+    transform: translateX(-360px);
+  }
+  to {
+    transform: translateX(1800px);
+  }
+}
+@keyframes lp-tracejado {
+  to {
+    background-position: 12px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.lp) {
+    scroll-behavior: auto;
+  }
+  .lp *,
+  .lp *::before,
+  .lp *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .lp .lp-pre {
+    transform: none;
+  }
+}

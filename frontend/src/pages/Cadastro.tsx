@@ -157,7 +157,7 @@ export function Cadastro() {
         <div className="mt-6 flex flex-col gap-1.5 text-sm text-muted">
           <span>
             Já tem conta?{" "}
-            <Link to="/" className="text-ink underline underline-offset-4">
+            <Link to="/login" className="text-ink underline underline-offset-4">
               Entrar
             </Link>
           </span>

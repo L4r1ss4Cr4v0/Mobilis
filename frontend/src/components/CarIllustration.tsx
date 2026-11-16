@@ -148,6 +148,9 @@ const CORES = [
   "#0f766e",
   "#e2e8f0",
 ];
+/** Cor do carro na ilustração (a mesma em todas as telas). */
+export const corDoCarro = (id: number) => CORES[id % CORES.length]!;
+
 const TIPO_POR_CATEGORIA: Record<string, Tipo> = {
   SUV: "suv",
   Sedã: "sedan",
